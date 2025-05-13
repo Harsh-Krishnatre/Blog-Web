@@ -1,0 +1,77 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+{%block 'content'%}
+<main class="container">
+        {% for featured_post in featured%}
+        {% if forloop.first %}
+        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary bg-image" style="background-image: url('{{featured_post.blog_image.url}}'); background-size:cover; background-position: center; ">
+            <div class="col-lg-6 px-0">
+                <h1 class="display-4 fst-italic text-white">{{featured_post.title}}</h1>
+                <p class="lead my-3 text-white ">{{featured_post.short_description}}</p>
+                <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <h3 class="text-uppercase, text-warning" style="letter-spacing:2px;">Featured Posts</h3>
+        <div class="row mb-2">
+            {% for featured_post in featured%}
+              {% if not forloop.first%}
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" >
+                    <div class="col p-4 d-flex flex-column position-static"> 
+                        <h3 class="mb-0 ">{{featured_post.title}}</h3>
+                        <div class="mb-1 ">{{featured_post.created_at|timesince}} | {{featured_post.author|capfirst}}</div>
+                        <p class="mb-auto ">{{featured_post.short_description}}</p> <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                            <!-- Continue reading -->
+                            <svg class="bi" aria-hidden="true">
+                                <use xlink:href="#chevron-right"></use>
+                            </svg> </a>
+                    </div>   
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="row g-5">
+            <div class="col-md-8">
+                <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                    <!-- From the Firehose -->
+                </h3>
+                {% for post in not_featured%}
+                <article class="blog-post">
+                    <h2 class="display-5 link-body-emphasis mb-1">{{post.title}}</h2>
+                    
+                    <p class="blog-post-meta">{{post.created_at|timesince}} By <a href="#">{{post.author|capfirst}}</a></p>
+                    <div class= "border border-gray-400 bg-light text-center border-2 rounded-3 py-2 px-2">
+                        <p>{{post.short_description}}</p>
+                    </div>
+                    
+                    <p>{{post.blog_body}}</p>
+                </article>
+                <hr>
+                {% endfor %}    
+                <nav class="blog-pagination" aria-label="Pagination"> <a class="btn btn-outline-primary rounded-pill"
+                        href="#">Older</a> <a class="btn btn-outline-secondary rounded-pill disabled"
+                        aria-disabled="true">Newer</a> </nav>
+            </div>
+            <div class="col-md-4">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="p-4 mb-3 bg-body-tertiary rounded">
+                        <h4 class="fst-italic">About</h4>
+                        <p class="mb-0">Hi, I’m Harsh Krishnatre. I created this blog as part of a project to learn and explore Django — and along the way, I discovered how much I enjoy sharing thoughts and ideas online.<br><br>This space is where I post things I’m learning, reflections from what I read, and sometimes, my own blog pieces. It’s a blend of experimentation and expression — and if you find something useful or interesting here, that’s a bonus!<br><br>Thanks for visiting — feel free to stick around, read a post or two, and reach out if you’d like to connect.</p>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="fst-italic">Follow Me</h4>
+                        <ol class="list-unstyled">
+                            <li><a href="https://github.com/Harsh-Krishnatre" target="_blank">GitHub</a></li>
+                            <li><a href="https://www.instagram.com/harsh_absent/profilecard/?igsh=OGxnbm1tbGVxMTI5" target="_blank">Social</a></li>
+                            <li><a href="https://www.linkedin.com/in/harsh-krishnatre-583449339/" target="_blank">Linkdin</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock 'content'%}

@@ -12,4 +12,4 @@ def home(requests):
         'not_featured': not_featured_posts,
     }
     
-    return render(requests,"home/base.html",context)
+    return render(requests,"home/home.html",context)
