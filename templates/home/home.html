@@ -9,7 +9,7 @@
             <div class="col-lg-6 px-0">
                 <h1 class="display-4 fst-italic text-white">{{featured_post.title}}</h1>
                 <p class="lead my-3 text-white ">{{featured_post.short_description}}</p>
-                <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+                <p class="lead mb-0"><a href="{% url 'blog' featured_post.slug %}" class="text-white fw-bold">Continue reading...</a></p>
             </div>
         </div>
         {% endif %}
@@ -25,6 +25,7 @@
                         <div class="mb-1 ">{{featured_post.created_at|timesince}} | {{featured_post.author|capfirst}}</div>
                         <p class="mb-auto ">{{featured_post.short_description}}</p> <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
                             <!-- Continue reading -->
+                            <a href="{% url 'blog' featured_post.slug%}" class="icon-link gap-1 icon-link-hover stretched-link">
                             <svg class="bi" aria-hidden="true">
                                 <use xlink:href="#chevron-right"></use>
                             </svg> </a>
@@ -41,7 +42,9 @@
                 </h3>
                 {% for post in not_featured%}
                 <article class="blog-post">
-                    <h2 class="display-5 link-body-emphasis mb-1">{{post.title}}</h2>
+                    <a href="{% url 'blog' post.slug %}" 
+                    class="icon-link gap-1 icon-link-hover stretched-link text-decoration-none">
+                    <h2 class="display-5 link-body-emphasis mb-1">{{post.title}}</h2></a>
                     
                     <p class="blog-post-meta">{{post.created_at|timesince}} By <a href="#">{{post.author|capfirst}}</a></p>
                     <div class= "border border-gray-400 bg-light text-center border-2 rounded-3 py-2 px-2">

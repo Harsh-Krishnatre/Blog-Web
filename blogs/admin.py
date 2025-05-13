@@ -11,6 +11,7 @@ class BlogsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
     search_fields = ('title','category__category_name', 'author__username',)
     list_editable = ('is_featured',)
+    
 
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Blogs,BlogsAdmin)

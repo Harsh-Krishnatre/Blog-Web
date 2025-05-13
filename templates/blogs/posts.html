@@ -1,4 +1,3 @@
-{% load static %}
 {% extends 'base/base.html'%}
 {%block 'content'%}
     <main class="container">
@@ -8,7 +7,7 @@
         {% endif %}
         {% for post in posts%}
             <article class="blog-post">
-                <a href="#" class="link-dark"><h4 class="display-7 link-body-emphasis mb-1">{{post.title}}</h4></a>
+                <a href="{% url 'blog' post.slug%}" class="link-dark"><h4 class="display-7 link-body-emphasis mb-1">{{post.title}}</h4></a>
                 
                 <p class="blog-post-meta">{{post.created_at|timesince}} By <a href="#">{{post.author|capfirst}}</a></p>
                 <div class= "text-left py-2 px-2">

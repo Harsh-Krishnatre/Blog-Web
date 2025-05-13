@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% block 'content' %}
+    <main class="container">
+        <h1 class="display-6">{{category.category_name}}</h1><hr>
+        {% if not blog %}
+            <h4>No Articles Found</h4>
+        {% endif %}
+            <article class="blog-post">
+                <h4 class="display-6 link-body-emphasis mb-1 text-center">{{blog.title}}</h4>
+                <div style="display: flex; justify-content: center;  height: 40vh; margin-bottom:10px;">
+                    <img src="{{ blog.blog_image.url }}" alt="Blog image"
+                        style="width: 80%; height: 100%; object-fit: cover; ">
+                </div>
+                
+                <p class="blog-post-meta text-end">{{blog.created_at|timesince}} By <a href="#">{{blog.author|capfirst}}</a></p>
+                <div class= "text-left py-2 px-2">
+                    <p>{{blog.short_description}}</p>
+                </div>
+                <div class= "text-left py-2 px-2">
+                    <p>{{blog.blog_body}}</p>
+                </div>
+            </article>
+            <hr>
+    </main>
+{% endblock 'content' %}
