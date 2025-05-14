@@ -34,8 +34,8 @@
                                 <td>{{category.category_name}}</td>
                                 <td>{{category.created_at}}</td>
                                 <td>{{category.updated_at}}</td>
-                                <td ><i class="fa fa-edit me-3 btn btn-primary btn-sm"></i>
-                                    <i class="fa fa-trash me-1 btn btn-warning btn-sm"></i>
+                                <td ><a href="{%url 'edit_category' category.id %}"><i class="fa fa-edit me-3 btn btn-primary btn-sm"></i></a>
+                                    <a href="{%url 'delete_category' category.id %}"><i class="fa fa-trash me-1 btn btn-warning btn-sm"></i></a>
                                 </td>
                             </tr>
 
