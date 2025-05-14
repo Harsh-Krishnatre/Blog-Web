@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect,HttpResponse,get_object_or_404
 from .models import Blogs,Category
 from django.contrib import messages
 
@@ -16,10 +16,10 @@ def posts_by_category(requests,id):
         'category':category,
     }
 
-    return render(requests,'blogs/posts.html',context)
+    return render(requests,'blogs/posts_by_category.html',context)
 
 def getblog(request,slug):
-    blog = Blogs.objects.get(slug=slug)
+    blog = get_object_or_404(Blogs, slug=slug, status='Published')
     context = {
         'blog':blog,
     }
