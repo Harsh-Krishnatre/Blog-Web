@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+
+{% block nav %}
+{% endblock nav %}
+
+{% block 'content' %}
+    <main class="container mt-5 ">
+        <div class="row ">
+            {% comment %} left sidebar {% endcomment %}
+            {% include "dashboard/component/leftsidebar.html" %}
+            {% comment %} right sidebar {% endcomment %}
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="display-6 fw-bold text-primary">Add New Categories</span>
+                    
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Sr no.</th>
+                            <th>Category</th>
+                            <th>Created_at</th>
+                            <th>Updated_at</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories%}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{category.category_name}}</td>
+                                <td>{{category.created_at}}</td>
+                                <td>{{category.updated_at}}</td>
+                                <td ><i class="fa fa-edit me-3 btn btn-primary btn-sm"></i>
+                                    <i class="fa fa-trash me-1 btn btn-warning btn-sm"></i>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock 'content'%}

@@ -1,0 +1,43 @@
+{% extends 'base/base.html'%}
+
+{% block title %}<title>Dashboard</title>{% endblock title %}
+
+{% block nav %}
+    
+{% endblock nav %}
+
+{% block 'content' %}
+    <main class="container mt-5 ">
+        <div class="row ">
+            {% comment %} left sidebar {% endcomment %}
+            {% include "dashboard/component/leftsidebar.html" %}
+            {% comment %} right sidebar {% endcomment %}
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card border-default mb-3">
+                            <div class="card-header text-center text-uppercase fw-bold">
+                                <h3 class=" text-primary display-8">All Categories</h3>
+                            </div>
+                            <div class="card-body text-dark">
+                                <h5 class="card-title text-center">{{category_count}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-default mb-3">
+                            <div class="card-header text-center text-uppercase fw-bold">
+                                <h3 class=" text-primary display-8">All Posts</h3>
+                            </div>
+                            <div class="card-body text-dark">
+                                <h5 class="card-title text-center">{{blogs_count}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+   
+{% endblock 'content' %}
+

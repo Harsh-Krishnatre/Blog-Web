@@ -23,9 +23,9 @@
                     <div class="col p-4 d-flex flex-column position-static"> 
                         <h3 class="mb-0 ">{{featured_post.title}}</h3>
                         <div class="mb-1 ">{{featured_post.created_at|timesince}} | {{featured_post.author|capfirst}}</div>
-                        <p class="mb-auto ">{{featured_post.short_description}}</p> <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                        <p class="mb-auto ">{{featured_post.short_description}}</p> <a href="#" class="icon-link gap-1 icon-link-hover ">
                             <!-- Continue reading -->
-                            <a href="{% url 'blog' featured_post.slug%}" class="icon-link gap-1 icon-link-hover stretched-link">
+                            <a href="{% url 'blog' featured_post.slug%}" class="icon-link gap-1 icon-link-hover ">
                             <svg class="bi" aria-hidden="true">
                                 <use xlink:href="#chevron-right"></use>
                             </svg> </a>
@@ -37,13 +37,11 @@
         </div>
         <div class="row g-5">
             <div class="col-md-8">
-                <h3 class="pb-4 mb-4 fst-italic border-bottom">
-                    <!-- From the Firehose -->
-                </h3>
+                <h2 class="text-uppercase text-primary">Recent Posts</h2>
                 {% for post in not_featured%}
                 <article class="blog-post">
                     <a href="{% url 'blog' post.slug %}" 
-                    class="icon-link gap-1 icon-link-hover stretched-link text-decoration-none">
+                    class="icon-link gap-1 icon-link-hover  text-decoration-none">
                     <h2 class="display-5 link-body-emphasis mb-1">{{post.title}}</h2></a>
                     
                     <p class="blog-post-meta">{{post.created_at|timesince}} By <a href="#">{{post.author|capfirst}}</a></p>
