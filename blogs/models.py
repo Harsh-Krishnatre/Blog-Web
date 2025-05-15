@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 class Category(models.Model):
@@ -20,7 +21,7 @@ STATUS_CHOICE = (
         
 class Blogs(models.Model):
     title = models.CharField(max_length=100,unique=True)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     blog_image = models.ImageField(upload_to='uploads/%y/%m/%d')
@@ -36,3 +37,14 @@ class Blogs(models.Model):
     
     class Meta:
         verbose_name_plural = 'Blogs'
+        
+    def save(self, *args, **kwargs):
+        if not self.slug:  # Only generate slug if empty
+            self.slug = slugify(self.title)
+            # Ensure slug is unique
+            original_slug = self.slug
+            counter = 1
+            while Blogs.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                self.slug = f"{original_slug}-{counter}"
+                counter += 1
+        super().save(*args, **kwargs)
