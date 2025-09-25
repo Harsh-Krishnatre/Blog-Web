@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from blogs.models import Category, Blogs
+from django.contrib.auth.models import Group
 from .forms import RegisterationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as auth_login,logout as auth_logout
@@ -19,8 +20,10 @@ def register(request):
     if request.method == 'POST':
         form = RegisterationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('home')
+            user = form.save()
+            user.groups.add(Group.objects.get(name='User'))
+            login(user)
+            return redirect('dashboard')
     else:
         form = RegisterationForm()
     context = {

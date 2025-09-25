@@ -1,0 +1,71 @@
+{% extends "base/base.html" %}
+
+{% block 'content' %}
+<main class="container mt-5">
+    <div class="row">
+        <!-- Left sidebar -->
+        {% include "dashboard/component/leftsidebar.html" %}
+        
+        <!-- Main content -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-center mb-3">
+                <span class="display-6 fw-bold text-primary">User Profile</span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="card shadow border-0 rounded-3 p-4" style="max-width: 700px; width: 100%;">
+                    <!-- User Information -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 text-center">
+                            {% if profile.profile_image %}
+                                <img src="{{ profile.profile_image.url }}" alt="Profile Image" class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 100px; height: 100px; margin: 0 auto;">
+                                    <span class="display-6">{{ user.username.0|upper }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-9">
+                            <h3>{{ user.username }}</h3>
+                            <p class="text-muted">{{ user.email }}</p>
+                            {% if profile.bio %}
+                                <p>{{ profile.bio }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Actions -->
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    
+                    <!-- Additional Profile Information -->
+                    <div class="mt-4">
+                        <h4>Account Information</h4>
+                        <hr>
+                        <div class="row mb-2">
+                            <div class="col-md-4 fw-bold">Username:</div>
+                            <div class="col-md-8">{{ user.username }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-4 fw-bold">Email:</div>
+                            <div class="col-md-8">{{ user.email }}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-4 fw-bold">Joined:</div>
+                            <div class="col-md-8">{{ user.date_joined|date }}</div>
+                        </div>
+                        {% if profile.website %}
+                        <div class="row mb-2">
+                            <div class="col-md-4 fw-bold">Website:</div>
+                            <div class="col-md-8">
+                                <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock 'content' %}

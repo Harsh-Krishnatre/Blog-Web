@@ -1,8 +1,10 @@
 <div class="col-md-3 ">
     <div class="nav flex-column nav-pills bg-light aria-orientation='vertical' p-2 border border-primary rounded-3 shadow-sm gap-4 " style="min-height: 250px;">
         <a href="{% url 'dashboard'%}" class = "nav-link text-dark {% if '/dashboard/' == request.path%}bg-warning{% endif %}">Dashboard</a>
-        <a href="{% url 'category_list'%}" class = "nav-link text-dark {% if '/categories/' in request.path%}bg-warning{% endif %}">Categories</a>
-        <a href="" class = "nav-link text-dark {% if '/posts/' in request.path%}bg-warning{% endif %}">Posts</a>
+        {% if is_admin %}
+            <a href="{% url 'category_list' %}" class="nav-link text-dark {% if '/categories/' in request.path %}bg-warning{% endif %}">Categories</a>
+        {% endif %}
+        <a href="{% url 'show_posts'%}" class = "nav-link text-dark {% if '/posts/' in request.path%}bg-warning{% endif %}">Posts</a>
         <a href="" class = "nav-link text-dark {% if '/logout/' == request.path%}bg-warning{% endif %}">Logout</a>
     </div>
 </div>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 class Category(models.Model):
@@ -30,6 +31,16 @@ class Blogs(models.Model):
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def generate_unique_slug(self):
+        base_slug = slugify(self.title)
+        slug = base_slug
+        num = 1
+        while Blogs.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{num}"
+            num += 1
+        return slug
+
     
     def __str__(self):
         return self.title
