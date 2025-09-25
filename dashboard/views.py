@@ -80,4 +80,25 @@ def add_posts(request):
         'form':form,
     }
     return render(request,'dashboard/posts/add_posts.html',context)
-    
+
+def edit_posts(request,pk):
+    post = get_object_or_404(Blogs,pk=pk)
+    if request.method == "POST":
+        form = BlogForm(request.POST,request.FILES,instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            title = form.cleaned_data['title']
+            post.slug = post.generate_unique_slug()
+            post.save()
+            return redirect('show_posts')
+    form = BlogForm(instance=post)
+    context = {
+        'form':form,
+        'post':post
+    }
+    return render(request,'dashboard/posts/edit_posts.html',context)
+
+def delete_posts(request,pk):
+    post = get_object_or_404(Blogs,pk=pk)
+    post.delete()
+    return redirect('show_posts')

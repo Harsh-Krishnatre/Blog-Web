@@ -13,5 +13,7 @@ urlpatterns = [
     # Post Paths
     path('posts/',views.show_posts, name="show_posts"),
     path('posts/add/',views.add_posts,name="add_post"),
+    path('posts/edit/<int:pk>',views.edit_posts,name="edit_posts"),
+    path('posts/delete/<int:pk>',views.delete_posts,name="delete_posts"),
     
 ]

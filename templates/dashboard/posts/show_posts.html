@@ -35,8 +35,8 @@
                                 <td>{{post.category}}</td>
                                 <td>{{post.author}}</td>
                                 <td>{{post.status}}</td>
-                                <td ><a href=""><i class="fa fa-edit me-3 btn btn-primary btn-sm"></i></a>
-                                    <a href=""><i class="fa fa-trash me-1 btn btn-warning btn-sm"></i></a>
+                                <td ><a href="{% url 'edit_posts' post.pk %}"><i class="fa fa-edit me-3 btn btn-primary btn-sm"></i></a>
+                                    <a href="{% url 'delete_posts' post.pk %}"><i class="fa fa-trash me-1 btn btn-warning btn-sm"></i></a>
                                 </td>
                             </tr>
 

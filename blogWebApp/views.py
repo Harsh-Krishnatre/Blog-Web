@@ -22,7 +22,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             user.groups.add(Group.objects.get(name='User'))
-            login(user)
+
+            auth_login(request,user)
             return redirect('dashboard')
     else:
         form = RegisterationForm()
